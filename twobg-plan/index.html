@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<meta charset="UTF-8">
+	<title>Document</title>	
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#box,#dv,#sel,#bd{
+			margin:30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+	<div id="dv">
+		
+	</div>
+	<div id="sel">
+		
+	</div>
+	<div id="bd">
+		
+	</div>
+	<div class="bbx">
+		
+	</div>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/iscroll5.js"></script>
+	<script src="js/index.js"></script>
+	<script>
+	/*	$("#box").sess({
+			width:200,  外容器宽度
+			height:10,	外容器高度
+			num:.36,	进度条百分比，小数
+			bg:"#ccc",	容器背景色
+			color:"red",进度条颜色
+			dy:"px",	宽高单位
+			arc:20,		拖拽圆形的宽高(选填)
+			arcbg:"#fff",	拖拽圆形的背景色
+			arcsh:"#666",	拖拽圆形的阴影大小和阴影色
+			callfn:function(obj){ 设置好后的回调函数(选填)
+				返回一个对象包含四个参数
+				对象包含四个属性
+				obj.ele  圆形拖拽
+				obj.par	 进度条盒子
+				obj.tag  进度条外部大盒子
+				obj.max  进度条的最大宽度
+				obj.min  圆形拖拽的半径(主要用于增加进度条宽度防止大盒子背景色显示)
+				ele.on("click",function(){
+					alert("这是点击事件")
+				})
+
+			}
+		})*/
+		$("#box").sess({
+			width:200,
+			height:10,
+			num:.36,
+			bg:"#ccc",
+			color:"red",
+			dy:"px",
+			arc:20,
+			arcbg:"#fff",
+			arcsh:"0 0 1px 1px #666",
+			callfn:function(obj){
+				var startx,endx,bool=false;
+				obj.ele.on("mousedown",function(e){
+					startx=e.offsetX+obj.par.offset().left;
+					bool=true;
+				})
+				$(window).on("mousemove",function(e){
+					if(bool){						
+						endx=e.x-startx;
+						if(endx>=obj.max){
+							obj.par.css("width",(obj.max+obj.min/2)+"px");
+							obj.ele.css("left",obj.max+"px");
+						}else if(endx<=0){
+							obj.par.css("width","0px");
+							obj.ele.css("left","0px");
+						}else{
+							obj.par.css("width",(endx+obj.min/2)+"px");
+							obj.ele.css("left",endx+"px");
+						}
+					}				
+				})
+				$(window).on("mouseup",function(e){			
+					bool=false;
+				})
+			}
+		})
+		$("#dv").sess({
+			width:600,
+			height:30,
+			num:0.45,
+			bg:"green",
+			color:"blue",
+			dy:"px"
+		})
+		$("#sel").sess({
+			width:400,
+			height:20,
+			num:0.66,
+			bg:"#999",
+			color:"red",
+			dy:"px"
+		})
+		$("#bd").sess({
+			width:800,
+			height:50,
+			num:0.86,
+			bg:"pink",
+			color:"#888",
+			dy:"px",
+			arc:80,
+			arcbg:"#ccc",
+			arcsh:"0 0 3px 3px red",
+			callfn:function(obj){
+				var startx,endx,bool=false;
+				obj.ele.on("mousedown",function(e){
+					startx=e.offsetX+obj.par.offset().left;
+					bool=true;
+				})
+				$(window).on("mousemove",function(e){
+					if(bool){						
+						endx=e.x-startx;
+						if(endx>=obj.max){
+							obj.par.css("width",(obj.max+obj.min/2)+"px");
+							obj.ele.css("left",obj.max+"px");
+						}else if(endx<=0){
+							obj.par.css("width","0px");
+							obj.ele.css("left","0px");
+						}else{
+							obj.par.css("width",(endx+obj.min/2)+"px");
+							obj.ele.css("left",endx+"px");
+						}
+					}				
+				})
+				$(window).on("mouseup",function(e){			
+					bool=false;
+				})
+			}
+		})
+		$(".bbx").sess({
+			width:3.3,
+			height:0.2,
+			num:0.33,
+			bg:"#999",
+			color:"#ff6699",
+			dy:"rem"
+		})
+	</script>
+</body>
+</html>
