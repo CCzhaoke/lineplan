@@ -1,5 +1,5 @@
-#test
-##twobg
+
+##twobg 双北京进度条使用说明
 
 	`$("#box").sess({
 			width:200,  外容器宽度
@@ -27,7 +27,7 @@
 		})`
 
 
-##twoborder 
+##twoborder 双边框进度条使用说明
 
 	`obj={
 			left:dv1,    *	定位在左边的盒子(可使用id或DOM0级对象)			
